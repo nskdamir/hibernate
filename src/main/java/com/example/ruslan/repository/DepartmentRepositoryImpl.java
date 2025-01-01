@@ -19,7 +19,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     public List<Department> getDepartment() {
 
         List<Department> departments = entityManager.createQuery(
-                "SELECT d FROM Department d LEFT JOIN FETCH d.employees e where e.name LIKE 'A%'", Department.class).getResultList();
+                "SELECT d FROM Department d LEFT JOIN FETCH d.employees e order by e.name", Department.class).getResultList();
 
         for (Department department : departments) {
             List<Employee> employees = department.getEmployees(); // Triggers a query for each department
