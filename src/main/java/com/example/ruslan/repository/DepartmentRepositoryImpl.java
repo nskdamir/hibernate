@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -19,9 +21,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     public List<Department> getDepartment() {
 
         List<Department> departments = entityManager.createQuery(
-                "SELECT d FROM Department d LEFT JOIN FETCH d.employees e order by e.name", Department.class)
-                .setFirstResult(1)
-                .setMaxResults(2)
+                "SELECT d FROM Department d LEFT JOIN d.employees e order by e.name", Department.class)
                 .getResultList();
 
 

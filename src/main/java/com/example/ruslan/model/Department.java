@@ -1,6 +1,7 @@
 package com.example.ruslan.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class Department {
 
     @Column
     private String name;
-
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department")
+    @BatchSize(size = 2)
     private List<Employee> employees;
 
     public Long getId() {
