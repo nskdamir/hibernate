@@ -11,9 +11,19 @@ public class Employee {
     @Column
     private String name;
 
+    @Column
+    private String status;
+
     @ManyToOne
     private Department department;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public Long getId() {
         return id;
     }
