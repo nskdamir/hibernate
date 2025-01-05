@@ -1,14 +1,13 @@
 package com.example.ruslan.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
 
 import java.util.List;
 
 @Entity
-@FilterDef(name = "statusFilter", parameters = @ParamDef(name = "status", type = String.class))
+@NamedEntityGraph(name = "WithDepartmentsAndEmployees", attributeNodes = {
+        @NamedAttributeNode("employees")
+})
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +15,7 @@ public class Department {
 
     @Column
     private String name;
-    @OneToMany(mappedBy = "department")
-    @Filter(name = "statusFilter", condition = "status = :status")
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public Long getId() {
