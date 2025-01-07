@@ -14,6 +14,8 @@ public class Employee {
     @Column
     private String status;
 
+    @Column
+    private String position;
     @ManyToOne
     private Department department;
 
@@ -46,5 +48,13 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

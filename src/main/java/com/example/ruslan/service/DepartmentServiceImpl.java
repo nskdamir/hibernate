@@ -13,8 +13,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepositoryImpl departmentRepository;
 
-    public List<Department> getDepartmentService() {
+    public List<Department> getDepartmentService(String position) {
 
-        return departmentRepository.getDepartment();
+        return departmentRepository.getDepartment(position);
     }
 }

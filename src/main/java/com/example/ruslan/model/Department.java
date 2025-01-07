@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedEntityGraph(name = "WithDepartmentsAndEmployees", attributeNodes = {
-        @NamedAttributeNode("employees")
-})
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

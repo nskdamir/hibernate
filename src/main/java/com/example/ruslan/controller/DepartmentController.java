@@ -4,6 +4,7 @@ import com.example.ruslan.model.Department;
 import com.example.ruslan.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping("/api/getDepartment")
-    public List<Department> getDepartmentList() {
-       return departmentService.getDepartmentService();
+    public List<Department> getDepartmentList(@RequestParam String position) {
+       return departmentService.getDepartmentService(position);
     }
 }

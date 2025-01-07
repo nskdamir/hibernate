@@ -5,5 +5,5 @@ import com.example.ruslan.model.Department;
 import java.util.List;
 
 public interface DepartmentService {
-    List<Department> getDepartmentService();
+    List<Department> getDepartmentService(String position);
 }
