@@ -5,16 +5,21 @@ import com.example.ruslan.model.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
-@Repository
+
 @RequiredArgsConstructor
+@Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+
 
     public List<Department> getDepartment(String position) {
         List<Department> departments = entityManager.createQuery(
@@ -31,5 +36,14 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
             );
         }
         return departments;
+    }
+
+    public Department save(Department entity) {
+        if (entity.getId() == null) {
+            entityManager.persist(entity);
+        } else {
+            entity = entityManager.merge(entity);
+        }
+        return entity;
     }
 }
