@@ -2,22 +2,33 @@ package com.example.ruslan.service;
 
 import com.example.ruslan.model.Department;
 import com.example.ruslan.model.Employee;
-import com.example.ruslan.repository.DepartmentRepositoryImpl;
+import com.example.ruslan.repository.DepartmentRepository;
+import com.example.ruslan.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final DepartmentRepositoryImpl departmentRepository;
+    private final DepartmentRepository departmentRepository;
 
     public List<Department> getDepartmentService(String position) {
 
-        return departmentRepository.getDepartment(position);
+        List<Department> departments = departmentRepository.getDepartment(position);
+        for (Department department : departments) {
+            List<Employee> employees = department.getEmployees();
+            System.out.println("Department: " + department.getName() + ", Employees: " + employees.size());
+
+            employees.forEach(employee ->
+                    System.out.println("Employee: " + employee.getName())
+            );
+        }
+        return departments;
     }
 
     @Transactional

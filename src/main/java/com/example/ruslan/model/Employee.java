@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
+    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq", allocationSize = 1)
     private Long id;
 
     @Column
@@ -18,6 +19,14 @@ public class Employee {
     private String position;
     @ManyToOne
     private Department department;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
 
     public String getStatus() {
         return status;
