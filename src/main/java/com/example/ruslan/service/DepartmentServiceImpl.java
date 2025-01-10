@@ -44,4 +44,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentRepository.save(department);
     }
+
+    @Transactional
+    public void removeDepartment(String name) {
+        try {
+            Department departmentByName = departmentRepository.getDepartmentByName(name);
+            departmentRepository.delete(departmentByName);
+        } catch (Exception e) {
+            throw new RuntimeException("Исключение, откат изменений", e);
+        }
+    }
 }

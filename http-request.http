@@ -21,3 +21,9 @@ Content-Type: application/json
 ]
 
 ###
+
+POST http://localhost:8086/api/removeDepartment?departmentName=Marketing department
+Content-Type: application/json
+
+
+###

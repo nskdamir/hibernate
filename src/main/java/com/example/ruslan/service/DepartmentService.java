@@ -9,4 +9,6 @@ public interface DepartmentService {
     List<Department> getDepartmentService(String position);
 
     Department createDepartmentWithEmployees(String departmentName,  List<Employee> employees);
+
+    void removeDepartment(String name);
 }

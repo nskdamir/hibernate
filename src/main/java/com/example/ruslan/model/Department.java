@@ -13,7 +13,7 @@ public class Department {
 
     @Column
     private String name;
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public Long getId() {

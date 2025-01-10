@@ -23,4 +23,9 @@ public class DepartmentController {
     public Department createDepartmentWithEmployees(@RequestParam String departmentName, @RequestBody List<Employee> employees) {
         return departmentService.createDepartmentWithEmployees(departmentName, employees);
     }
+    @PostMapping("/api/removeDepartment")
+    public void removeDepartment(@RequestParam String departmentName) {
+        departmentService.removeDepartment(departmentName);
+    }
+
 }
