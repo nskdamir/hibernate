@@ -1,30 +1,31 @@
 package com.example.ruslan.service;
 
+import com.example.ruslan.model.Department;
 import com.example.ruslan.model.Employee;
+import com.example.ruslan.repository.DepartmentRepository;
 import com.example.ruslan.repository.EmployeeRepository;
-import jakarta.persistence.OptimisticLockException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 
-import java.util.Collections;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class EmployeeServiceImplTest {
 
-    @Autowired
+    @Mock
     private EmployeeRepository employeeRepository;
 
-    @Autowired
+    @Mock
     private EmployeeService employeeService;
+
+    @Mock
+    private DepartmentRepository departmentRepository;
 
     @Test
     void updateEmployeeTest() throws InterruptedException {
@@ -36,7 +37,7 @@ class EmployeeServiceImplTest {
         employeeRepository.save(employee);
 
         Thread thread1 = new Thread(() -> {
-           employeeService.updateEmployee(employeeRepository.findEmployeeByName("Alina"));
+            employeeService.updateEmployee(employeeRepository.findEmployeeByName("Alina"));
             System.out.println(employee.getStatus() + employee.getVersion());
         });
 
