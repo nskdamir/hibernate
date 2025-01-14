@@ -19,6 +19,11 @@ public class DepartmentController {
        return departmentService.getDepartmentService(position);
     }
 
+    @GetMapping("/api/getDepartmentWithEmployees")
+    public Department getDepartmentWithEmployees(@RequestParam Long departmentId) {
+        return departmentService.getDepartmentWithEmployees(departmentId);
+    }
+
     @PostMapping("/api/createDepartment")
     public Department createDepartmentWithEmployees(@RequestParam String departmentName, @RequestBody List<Employee> employees) {
         return departmentService.createDepartmentWithEmployees(departmentName, employees);

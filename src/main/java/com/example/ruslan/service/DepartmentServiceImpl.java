@@ -54,4 +54,16 @@ public class DepartmentServiceImpl implements DepartmentService {
             throw new RuntimeException("Исключение, откат изменений", e);
         }
     }
+
+    @Transactional
+    public Department getDepartmentWithEmployees(Long departmentId) {
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(() -> new RuntimeException("Департамент не найден"));
+
+        department.getEmployees().forEach(employee ->
+                System.out.println("Employee: " + employee.getName())
+        );
+
+        return department;
+    }
 }

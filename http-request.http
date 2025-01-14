@@ -22,8 +22,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8086/api/removeDepartment?departmentName=Marketing department
+POST http://localhost:8086/api/removeDepartment?departmentName=Engineer Department
 Content-Type: application/json
 
 
 ###
+GET http://localhost:8086/api/getDepartmentWithEmployees?departmentId=2
+Content-Type: application/json
+###
+

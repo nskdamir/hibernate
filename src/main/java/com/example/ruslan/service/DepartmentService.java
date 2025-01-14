@@ -11,4 +11,6 @@ public interface DepartmentService {
     Department createDepartmentWithEmployees(String departmentName,  List<Employee> employees);
 
     void removeDepartment(String name);
+
+    Department getDepartmentWithEmployees(Long departmentId);
 }
