@@ -61,7 +61,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Department getDepartmentWithEmployees(Long departmentId) {
         Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new RuntimeException("Департамент не найден"));
