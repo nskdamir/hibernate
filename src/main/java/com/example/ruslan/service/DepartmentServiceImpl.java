@@ -1,5 +1,6 @@
 package com.example.ruslan.service;
 
+import com.example.ruslan.application_error.DepartmentWithEmployeesException;
 import com.example.ruslan.model.Department;
 import com.example.ruslan.model.Employee;
 import com.example.ruslan.repository.DepartmentRepository;
@@ -49,7 +50,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void removeDepartment(String name) {
         try {
             Department departmentByName = departmentRepository.getDepartmentByName(name);
-            departmentRepository.delete(departmentByName);
+
+            if (departmentByName.getEmployees().isEmpty()) {
+                departmentRepository.delete(departmentByName);
+            } else {
+                throw new DepartmentWithEmployeesException("Не можем удалить деепартамент, т.к. в нем есть сотрудники");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Исключение, откат изменений", e);
         }
